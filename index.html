@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>TRISTE</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" type="text/css" href="css/style2.css">
+    <link href='https://fonts.googleapis.com/css?family=Staatliches' rel='stylesheet'>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <link rel="shortcut icon" href="favicon.ico" />
+</head>
+
+<body>
+    <div class="wrapper" id="wrapper">
+        <script>
+            var height = window.innerHeight ||
+                document.documentElement.clientHeight ||
+                document.body.clientHeight;
+            var width = window.innerWidth ||
+                document.documentElement.clientWidth ||
+                document.body.clientWidth;
+            var minLength = Math.min(height, width);
+            var scale = (minLength - minLength / 10) / 600;
+            var wr = document.getElementById("wrapper");
+            wr.style.zoom = scale;
+            /* wr.style.webkitTransform = "scale(" + scale + ");"; */
+            if (window.addEventListener) {
+                window.addEventListener('resize', function () {
+                    height = window.innerHeight ||
+                        document.documentElement.clientHeight ||
+                        document.body.clientHeight;
+                    width = window.innerWidth ||
+                        document.documentElement.clientWidth ||
+                        document.body.clientWidth;
+                    minLength = Math.min(height, width);
+                    scale = (minLength - minLength / 10) / 600;
+                    wr.style.zoom = scale;
+                    /* wr.style.webkitTransform = "scale(" + scale + ");"; */
+                }, true);
+            }
+        </script>
+        <div id="menu" class="windows">
+            <div class="titleContainer">
+                <span>
+                    <p class="title">trisTe</p>
+                </span>
+            </div>
+            <div class="buttonContainer">
+                <button type="button" class="buttons" id="startButton">New Game</button>
+            </div>
+            <div class="buttonContainer">
+                <button type="button" class="buttons" id="recordButton">Record</button>
+            </div>
+            <div class="buttonContainer">
+                <button type="button" class="buttons" id="infoButton">Info</button>
+            </div>
+        </div>
+        <div id="recordContainer" class="windows">
+            <button type="button" class="buttons" id="backButton">Back</button>
+            <script>
+                document.getElementById("recordContainer").style.display = "none";
+                document.getElementById("backButton").onclick = function () {
+                    menuArea.style.display = "block";
+                    recordArea.style.display = "none";
+                };
+            </script>
+            <div id="record"></div>
+        </div>
+        <div id="insertPointContainer" class="windows">
+            <div id="gamePointArea">
+                <span>
+                    <p style="font-size: 50px; top: 5%; transform: translateY(20px);">GAME OVER</p>
+                    <p id="pointsLabel"></p>
+                </span>
+                <form>
+                    <input type="text" id="playerName" maxlength="12" placeholder="Your name" autocomplete="off">
+                </form>
+            </div>
+            <div id="buttonPointArea">
+                <button type="button" class="buttons" id="backButtonPoint">Back</button>
+                <button type="button" class="buttons" id="insertButtonPoint">Insert</button>
+            </div>
+            <script>
+                var insertPointArea = document.getElementById("insertPointContainer");
+                insertPointArea.style.display = "none";
+            </script>
+        </div>
+        <div id="gamespace" class="windows">
+            <div id="pointsArea"></div>
+            <div id="mouse-area"></div>
+        </div>
+        <div id="alertContainer" class="alertContainer" style="display: none">
+            <div class="alertArea">
+                <span>Il pezzo non può essere intrecciato!</span>
+                <button type="button" class="buttons" id="okAlert">Ok</button>
+            </div>
+        </div>
+        <script>
+            var alertContainer = document.getElementById("alertContainer");
+            var okAlert = document.getElementById("okAlert");
+            okAlert.onclick = function () {
+                alertContainer.style.display = "none";
+            }
+        </script>
+        <div class="alertContainer">
+            <div id="infoArea" class="alertArea" style="display: none; z-index: 125; width: 400px;">
+                <p>
+                    Gioco realizzato come progetto per il corso di Programmazione di
+                    Interfacce a.a. 2018/19.</p>
+                <div style="font-size: 19px">
+                    <p class="bottom-three">Disegna i tuoi pezzi all'interno dell'area rossa e cerca di riempire
+                        il maggior spazio possibile nel minor tempo. Per disegnare un pezzo clicca nei punti dove vuoi
+                        inserire un vertice e chiudilo cliccando nel pallino rosso. <br>Attenzione però: più i pezzi sono grandi meno valore hanno!
+                    </p>
+                </div>
+                <div style="font-size: 16px;">Motore di gioco realizzato con <a
+                        href="https://github.com/liabru/matter-js">matter-js</a>. <br>
+                    Icons made by <a href="https://www.flaticon.com/authors/freepik" title="Freepik">Freepik</a>
+                    from
+                    <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a> is licensed by <a
+                        href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0"
+                        target="_blank">CC 3.0
+                        BY</a></div><br>
+
+                <button type="button" class="buttons" id="backInfo"
+                    style="margin: 0 auto; padding: 6px 12px; z-index: 116; font-size: 22px;">Back</button>
+                <script>
+                    var backInfo = document.getElementById("backInfo");
+                    var infoArea = document.getElementById("infoArea")
+                    backInfo.onclick = function () {
+                        infoArea.style.display = "none";
+                    }
+                    document.getElementById("infoButton").onclick = function () {
+                        infoArea.style.display = "block";
+                    }
+                </script>
+            </div>
+        </div>
+    </div>
+    <script>
+        document.getElementById("recordContainer").style.display = "none";
+        /*  document.getElementById("menu").style.display = "none"; */
+    </script>
+    </div>
+    <!--  -->
+    <script src="scripts/game.js"></script>
+    <script src="node_modules/matter-js/build/matter.js"></script>
+    <script src="node_modules/poly-decomp/build/decomp.js"></script>
+    <script src="scripts/physic.js"></script>
+    <script src="scripts/utils.js"></script>
+    <script src="scripts/menu.js"></script>
+    <script src="scripts/easytimer.min.js"></script>
+    <script src="scripts/points.js"></script>
+    <script>
+        var chrono = new easytimer.Timer();
+    </script>
+</body>
