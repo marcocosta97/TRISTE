@@ -2,7 +2,7 @@
 
 This project was realized (in a very small amount of time) during the 3rd year Bachelor course of "Programmazione di Interfacce" (Graphic User Interface Programming) at the University of Pisa a.y. 2018/2019.
 
-You can play the game [here](https://triste.mcosta.it/).
+You can play the game [here](https://triste-service.onrender.com).
 
 ## How to play
 
